@@ -1,0 +1,72 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "manish-adfaccount1"
+		},
+		"ls_adls_accountKey": {
+			"value": ""
+		},
+		"ls_adls_connect_accountKey": {
+			"value": ""
+		},
+		"ls_databricks_accessToken": {
+			"value": ""
+		},
+		"ls_demo_sink_connection_accountKey": {
+			"value": ""
+		},
+		"ls_lookupwatertb_password": {
+			"value": ""
+		},
+		"ls_netflix_adls_con_accountKey": {
+			"value": ""
+		},
+		"ls_sqldb_password": {
+			"value": ""
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"value": "https://manishadlsgen2.dfs.core.windows.net/"
+		},
+		"ls_adls_connect_properties_typeProperties_url": {
+			"value": "https://manishadlsgen2.dfs.core.windows.net/"
+		},
+		"ls_databricks_properties_typeProperties_existingClusterId": {
+			"value": "0305-054042-q0u4pt2u"
+		},
+		"ls_demo_sink_connection_properties_typeProperties_url": {
+			"value": "https://manishadlsgen2.dfs.core.windows.net/"
+		},
+		"ls_lookupwatertb_properties_typeProperties_server": {
+			"value": "manish-sqlserver.database.windows.net"
+		},
+		"ls_lookupwatertb_properties_typeProperties_database": {
+			"value": "manishsqldb"
+		},
+		"ls_lookupwatertb_properties_typeProperties_userName": {
+			"value": "adminsql"
+		},
+		"ls_netflix_adls_con_properties_typeProperties_url": {
+			"value": "https://manishadlsgen2.dfs.core.windows.net/"
+		},
+		"ls_netflix_git_con_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
+		"ls_sqldb_properties_typeProperties_server": {
+			"value": "manish-sqlserver.database.windows.net"
+		},
+		"ls_sqldb_properties_typeProperties_database": {
+			"value": "manishsqldb"
+		},
+		"ls_sqldb_properties_typeProperties_userName": {
+			"value": "adminsql"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
