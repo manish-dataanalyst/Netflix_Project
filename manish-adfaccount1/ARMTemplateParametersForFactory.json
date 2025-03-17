@@ -51,7 +51,7 @@
 			"value": "https://manishadlsgen2.dfs.core.windows.net/"
 		},
 		"ls_netflix_git_con_properties_typeProperties_url": {
-			"value": "https://raw.githubusercontent.com"
+			"value": "https://raw.githubusercontent.com/"
 		},
 		"ls_sqldb_properties_typeProperties_server": {
 			"value": "manish-sqlserver.database.windows.net"

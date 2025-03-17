@@ -61,7 +61,7 @@
 		},
 		"ls_netflix_git_con_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://raw.githubusercontent.com"
+			"defaultValue": "https://raw.githubusercontent.com/"
 		},
 		"ls_sqldb_properties_typeProperties_server": {
 			"type": "string",
@@ -241,7 +241,7 @@
 					"location": {
 						"type": "HttpServerLocation",
 						"relativeUrl": {
-							"value": "manish-dataanalyst/Netflix_Project/refs/heads/main/@{dataset().file_name}.csv",
+							"value": "manish-dataanalyst/Netflix_Project/refs/heads/main/@{dataset().file_name}",
 							"type": "Expression"
 						}
 					},
@@ -473,7 +473,7 @@
 						"type": "Validation",
 						"dependsOn": [
 							{
-								"activity": "Set variable1",
+								"activity": "Setvariable1",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -509,7 +509,7 @@
 						}
 					},
 					{
-						"name": "Set variable1",
+						"name": "Setvariable1",
 						"type": "SetVariable",
 						"dependsOn": [
 							{
@@ -527,7 +527,7 @@
 						"typeProperties": {
 							"variableName": "getmetadata",
 							"value": {
-								"value": "@activity('Webactivity').output",
+								"value": "@activity('Webactivity').output.response",
 								"type": "Expression"
 							}
 						}
@@ -555,10 +555,6 @@
 							{
 								"folder_name": "netflix_directors",
 								"file_name": "netflix_directors.csv"
-							},
-							{
-								"folder_name": "netflix_titles",
-								"file_name": "netflix_titles.csv"
 							}
 						]
 					}
