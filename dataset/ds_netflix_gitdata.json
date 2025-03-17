@@ -1,0 +1,30 @@
+{
+	"name": "ds_netflix_gitdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_netflix_git_con",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"file_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "manish-dataanalyst/Netflix_Project/refs/heads/main/@{dataset().file_name}.csv",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
