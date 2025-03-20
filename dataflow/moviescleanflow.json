@@ -34,6 +34,17 @@
 						"referenceName": "ls_blob_con_df",
 						"type": "LinkedServiceReference"
 					}
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_output_blob",
+						"type": "DatasetReference"
+					},
+					"name": "output3",
+					"rejectedDataLinkedService": {
+						"referenceName": "ls_blob_con_df",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -44,7 +55,10 @@
 					"name": "moviesbyyear1"
 				},
 				{
-					"name": "sort1"
+					"name": "sortbyyear"
+				},
+				{
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -62,8 +76,12 @@
 				"     moviescount = count(),",
 				"     partitionBy('hash', 1)) ~> moviesbyyear1",
 				"moviesbyyear1 sort(asc(Year, true),",
-				"     partitionBy('hash', 1)) ~> sort1",
-				"sort1 sink(allowSchemaDrift: true,",
+				"     partitionBy('hash', 1)) ~> sortbyyear",
+				"columnextraction keyGenerate(output(key as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L,",
+				"     partitionBy('hash', 1)) ~> surrogateKey1",
+				"sortbyyear sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['movies_by_year.csv'],",
 				"     skipDuplicateMapInputs: true,",
@@ -74,7 +92,13 @@
 				"     partitionFileNames:['movies_cleaned.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> output1"
+				"     partitionBy('hash', 1)) ~> output1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['surrogatekeyfile'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> output3"
 			]
 		}
 	}
