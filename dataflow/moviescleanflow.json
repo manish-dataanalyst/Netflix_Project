@@ -1,0 +1,81 @@
+{
+	"name": "moviescleanflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_input_blob",
+						"type": "DatasetReference"
+					},
+					"name": "movies"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_output_blob",
+						"type": "DatasetReference"
+					},
+					"name": "output2",
+					"rejectedDataLinkedService": {
+						"referenceName": "ls_blob_con_df",
+						"type": "LinkedServiceReference"
+					}
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_output_blob",
+						"type": "DatasetReference"
+					},
+					"name": "output1",
+					"rejectedDataLinkedService": {
+						"referenceName": "ls_blob_con_df",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "columnextraction"
+				},
+				{
+					"name": "moviesbyyear1"
+				},
+				{
+					"name": "sort1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          movieId as string,",
+				"          title as string,",
+				"          genres as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> movies",
+				"movies derive(Year = toInteger(trim(right(title, 6),'()')),",
+				"          title = trim(substring(title, 0, length(title)-6),' ')) ~> columnextraction",
+				"columnextraction aggregate(groupBy(Year),",
+				"     moviescount = count(),",
+				"     partitionBy('hash', 1)) ~> moviesbyyear1",
+				"moviesbyyear1 sort(asc(Year, true),",
+				"     partitionBy('hash', 1)) ~> sort1",
+				"sort1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['movies_by_year.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> output2",
+				"columnextraction sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['movies_cleaned.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> output1"
+			]
+		}
+	}
+}
