@@ -26,6 +26,12 @@
 		"ls_sqldb_password": {
 			"value": ""
 		},
+		"ls_adls_con_df_accountKey": {
+			"value": ""
+		},
+		"ls_blob_con_df_connectionString": {
+			"value": ""
+		},
 		"ls_adls_properties_typeProperties_url": {
 			"value": "https://manishadlsgen2.dfs.core.windows.net/"
 		},
@@ -61,6 +67,9 @@
 		},
 		"ls_sqldb_properties_typeProperties_userName": {
 			"value": "adminsql"
+		},
+		"ls_adls_con_df_properties_typeProperties_url": {
+			"value": "https://manishadls2storage.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"value": ""
